@@ -1,9 +1,26 @@
 -- ~/.config/nvim/lua/plugins/image.lua
+-- Sixel and the Kitty graphics protocol are mutually exclusive here: Konsole
+-- speaks sixel and has no Kitty-protocol support; Ghostty is the reverse (no
+-- sixel as of 1.3). Pick per-terminal so the same config works in both.
+local function graphics_backend()
+  local term = vim.env.TERM or ""
+  if
+    vim.env.GHOSTTY_RESOURCES_DIR
+    or vim.env.GHOSTTY_BIN_DIR
+    or vim.env.KITTY_WINDOW_ID
+    or term:match("ghostty")
+    or term:match("kitty")
+  then
+    return "kitty"
+  end
+  return "sixel"
+end
+
 return {
   "3rd/image.nvim",
   event = "VeryLazy",
   opts = {
-    backend = "sixel",
+    backend = graphics_backend(),
     processor = "magick_cli",
     integrations = { markdown = { enabled = true } },
     hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
