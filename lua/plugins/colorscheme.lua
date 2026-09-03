@@ -11,11 +11,11 @@ return {
         lazy = false,
         priority = 1000,
     },
-    -- Make gruvbox the active colorscheme.
+    -- Make github-light the active colorscheme.
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "gruvbox",
+            colorscheme = "github_light",
         },
     },
 }
