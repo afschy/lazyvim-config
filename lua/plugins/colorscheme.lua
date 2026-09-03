@@ -6,4 +6,16 @@ return {
         lazy = false,
         priority = 1000,
     },
+    {
+        "ellisonleao/gruvbox.nvim",
+        lazy = false,
+        priority = 1000,
+    },
+    -- Make gruvbox the active colorscheme.
+    {
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = "gruvbox",
+        },
+    },
 }
