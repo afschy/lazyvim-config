@@ -8,3 +8,4 @@ map("n", "<leader>cH", "<cmd>ClangdSwitchSourceHeader<cr>", { desc = "Header/Sou
 map("n", "<leader>m", "<cmd>make<cr>", { desc = "Build" })
 map({ "n", "v" }, "<leader>y", '"+y')
 map("n", "<leader>Y", '"+Y')
+
