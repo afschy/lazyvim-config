@@ -162,7 +162,10 @@ M.quote = sq
 
 -- Resolved once, at load: commands are spawned from inside picker finders,
 -- which run in a libuv callback where Vimscript functions are off limits.
-local control_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "remote-ssh")
+-- Shared with the file-open path. `~/.ssh/config` points ssh's ControlPath at
+-- this same `~/.ssh/sockets/%C`, so browsing warms the master that remote-ssh's
+-- bare `ssh`/`scp` then reuse when opening a file. Keep the two in lockstep.
+local control_dir = vim.fs.joinpath(vim.fn.expand("~"), ".ssh", "sockets")
 vim.uv.fs_mkdir(control_dir, tonumber("700", 8))
 
 local function ctrl_path()
